@@ -170,6 +170,7 @@ CodePin.propTypes = {
   containerPinStyle : React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.number]),
   containerStyle    : React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.number]),
   textStyle         : React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.number]),
+  errorStyle        : React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.number]),
 };
 
 CodePin.defaultProps = {
