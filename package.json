@@ -1,0 +1,25 @@
+{
+  "name": "react-native-pin-code",
+  "version": "0.0.1",
+  "description": "A simple pin code component for react-native",
+  "main": "pin-code.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gkueny/react-native-pin-code.git"
+  },
+  "keywords": [
+    "react-native",
+    "pin-code",
+    "pin",
+    "code"
+  ],
+  "author": "gkueny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gkueny/react-native-pin-code/issues"
+  },
+  "homepage": "https://github.com/gkueny/react-native-pin-code#readme"
+}
