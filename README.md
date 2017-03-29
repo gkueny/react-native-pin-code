@@ -6,7 +6,7 @@ A simple pin code component
 
 ## props
 
-| prop              | type                      | description                    | isRequired |                                                                                                                                                                                                                    |
+| prop              | type                      | description                    | isRequired | default value                                                                                                                                                                                                      |
 |-------------------|---------------------------|--------------------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |        code       | number                    | pin code                       | required   |                                                                                                                                                                                                                    |
 | success           | function                  | call on success                | required   |                                                                                                                                                                                                                    |
