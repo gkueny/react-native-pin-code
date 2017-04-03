@@ -13,7 +13,7 @@ import CodePin from 'react-native-pin-code';
 const {height, width} = Dimensions.get('window');
 
 
-export default class testCodePin2 extends Component {
+export default class simpleExample extends Component {
 
   constructor() {
     super();
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('testCodePin2', () => testCodePin2);
+AppRegistry.registerComponent('simpleExample', () => simpleExample);
