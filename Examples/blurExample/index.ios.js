@@ -8,7 +8,7 @@ import {
   View
 } from 'react-native';
 
-import CodePin from 'pin-code.js';
+import CodePin from 'react-native-pin-code';
 const {BlurView} = require('react-native-blur');
 
 const {height, width} = Dimensions.get('window');
