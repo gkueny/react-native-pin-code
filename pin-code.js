@@ -22,12 +22,6 @@ class CodePin extends Component {
     this.handleEdit = this.handleEdit.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.autoFocus) {
-      this.focus(0);
-    }
-  }
-
   clean() {
     this.setState({
       code: new Array(this.props.number).fill(''),
@@ -106,7 +100,7 @@ class CodePin extends Component {
     } = this.props;
 
     pins = [];
-
+    console.log('render');
     for (let index = 0; index < number; index++) {
       const id = index;
       pins.push(
@@ -120,6 +114,7 @@ class CodePin extends Component {
           returnKeyType={'done'}
           autoCapitalize={'sentences'}
           autoCorrect={false}
+          autoFocus={id === 0 && this.props.autoFocusFirst}
           {...props}
         />
       );
@@ -147,7 +142,7 @@ CodePin.propTypes = {
   code: PropTypes.string.isRequired,
   success: PropTypes.func.isRequired,
   number: PropTypes.number,
-  autoFocus: PropTypes.bool,
+  autoFocusFirst: PropTypes.bool,
   pinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerPinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
@@ -157,7 +152,7 @@ CodePin.propTypes = {
 
 CodePin.defaultProps = {
   number: 4,
-  autoFocus: true,
+  autoFocusFirst: true,
   text: 'Pin code',
   error: 'Bad pin code.',
   pinStyle: {},
