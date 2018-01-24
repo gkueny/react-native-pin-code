@@ -15,6 +15,11 @@ class CodePin extends Component {
     };
 
     this.textInputsRefs = [];
+
+    this.clean = this.clean.bind(this);
+    this.focus = this.focus.bind(this);
+    this.isFocus = this.isFocus.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   clean() {
