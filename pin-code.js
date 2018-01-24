@@ -109,7 +109,7 @@ class CodePin extends Component {
           returnKeyType={'done'}
           autoCapitalize={'sentences'}
           autoCorrect={false}
-          autofocus={index === 0 && this.props.autofocus}
+          autoFocus={index === 0 && this.props.autoFocus}
           {...props}
         />
       );
@@ -137,7 +137,7 @@ CodePin.propTypes = {
   code: PropTypes.string.isRequired,
   success: PropTypes.func.isRequired,
   number: PropTypes.number,
-  autofocus: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   pinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerPinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
@@ -147,7 +147,7 @@ CodePin.propTypes = {
 
 CodePin.defaultProps = {
   number: 4,
-  autofocus: true,
+  autoFocus: true,
   text: 'Pin code',
   error: 'Bad pin code.',
   pinStyle: {},
