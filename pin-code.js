@@ -17,19 +17,19 @@ class CodePin extends Component {
     this.textInputsRefs = [];
   }
 
-  clean = () => {
+  clean() {
     this.setState({
       code: new Array(this.props.number).fill(''),
       edit: 0
     });
     this.focus(0);
-  };
+  }
 
-  focus = id => {
+  focus(id) {
     this.textInputsRefs[id].focus();
-  };
+  }
 
-  isFocus = id => {
+  isFocus(id) {
     let newCode = this.state.code.slice();
 
     for (let i = 0; i < newCode.length; i++) if (i >= id) newCode[i] = '';
@@ -38,9 +38,9 @@ class CodePin extends Component {
       code: newCode,
       edit: id
     });
-  };
+  }
 
-  handleEdit = (number, id) => {
+  handleEdit(number, id) {
     let newCode = this.state.code.slice();
     newCode[id] = number;
 
@@ -79,7 +79,7 @@ class CodePin extends Component {
         edit: prevState.edit + 1
       };
     });
-  };
+  }
 
   render() {
     const {
