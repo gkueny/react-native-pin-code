@@ -10,7 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/gkueny/react-native-pin-code.git"
   },
-  "keywords": ["react-native", "pin-code", "pin", "code"],
+  "keywords": [
+    "react-native",
+    "pin-code",
+    "pin",
+    "code"
+  ],
   "author": "gkueny",
   "license": "ISC",
   "bugs": {
