@@ -22,6 +22,12 @@ class CodePin extends Component {
     this.handleEdit = this.handleEdit.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.autoFocus) {
+      this.focus(0);
+    }
+  }
+
   clean() {
     this.setState({
       code: new Array(this.props.number).fill(''),
@@ -114,7 +120,6 @@ class CodePin extends Component {
           returnKeyType={'done'}
           autoCapitalize={'sentences'}
           autoCorrect={false}
-          autoFocus={index === 0 && this.props.autoFocus}
           {...props}
         />
       );
