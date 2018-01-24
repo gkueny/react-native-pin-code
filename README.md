@@ -24,6 +24,17 @@ npm install react-native-pin-code --save
 | textStyle         | object, StyleSheet object | text style                 |            | { textAlign: 'center', color: 'gray', fontSize: 20, marginTop: 30 }                                                                                                                                                |
 | errorStyle        | object, StyleSheet object | error text style           |            | { textAlign: 'center', color: 'red', paddingTop: 10 }                                                                                                                                                              |
 
+All other `props` are pass down to `TextInput` component.
+
+For instance you can customize keyboardtype :
+
+```js
+<CodePin
+  //...
+  keyboardType="numeric"
+/>
+```
+
 ## Functions
 
 To use pin code component function, use ref :
