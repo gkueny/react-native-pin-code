@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-import { TextInput, View, Text } from 'react-native';
+import React, {Component} from 'react';
+import {PropTypes} from 'prop-types';
+import {TextInput, View, Text} from 'react-native';
 
-import { codePinStyles } from './pin-code-style';
+import {codePinStyles} from './pin-code-style';
 
 class CodePin extends Component {
   constructor(props) {
@@ -32,8 +32,7 @@ class CodePin extends Component {
   isFocus = id => {
     let newCode = this.state.code.slice();
 
-    for (let i = 0; i < newCode.length; i++)
-      if (i >= id) newCode[i] = '';
+    for (let i = 0; i < newCode.length; i++) if (i >= id) newCode[i] = '';
 
     this.setState({
       code: newCode,
@@ -110,32 +109,25 @@ class CodePin extends Component {
           returnKeyType={'done'}
           autoCapitalize={'sentences'}
           autoCorrect={false}
+          autofocus={index === 0 && this.props.autofocus}
           {...props}
         />
       );
     }
 
-    const error = this.state.error
-      ? <Text style={[codePinStyles.error, errorStyle]}>
-          {this.state.error}
-        </Text>
-      : null;
+    const error = this.state.error ? (
+      <Text style={[codePinStyles.error, errorStyle]}>{this.state.error}</Text>
+    ) : null;
 
     return (
       <View style={[codePinStyles.container, containerStyle]}>
-
-        <Text style={[codePinStyles.text, textStyle]}>
-          {text}
-        </Text>
+        <Text style={[codePinStyles.text, textStyle]}>{text}</Text>
 
         {error}
 
         <View style={[codePinStyles.containerPin, containerPinStyle]}>
-
           {pins}
-
         </View>
-
       </View>
     );
   }
@@ -145,6 +137,7 @@ CodePin.propTypes = {
   code: PropTypes.string.isRequired,
   success: PropTypes.func.isRequired,
   number: PropTypes.number,
+  autofocus: PropTypes.bool,
   pinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerPinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
@@ -154,6 +147,7 @@ CodePin.propTypes = {
 
 CodePin.defaultProps = {
   number: 4,
+  autofocus: true,
   text: 'Pin code',
   error: 'Bad pin code.',
   pinStyle: {},
