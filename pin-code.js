@@ -51,10 +51,10 @@ class CodePin extends Component {
 
     // User filling the last pin ?
     if (id === this.props.number - 1) {
+      this.focus(0);
+
       // But it's different than code
       if (this.props.code !== newCode.join('')) {
-        this.focus(0);
-
         this.setState({
           error: this.props.error,
           code: new Array(this.props.number).fill(''),
@@ -62,15 +62,9 @@ class CodePin extends Component {
         });
 
         return;
-      } else {
-        this.setState({
-          error: '',
-          code: newCode,
-          edit: this.state.edit
-        });
-
-        this.props.success();
       }
+
+      this.props.success();
 
       return;
     }
@@ -100,7 +94,6 @@ class CodePin extends Component {
     } = this.props;
 
     pins = [];
-    console.log('render');
     for (let index = 0; index < number; index++) {
       const id = index;
       pins.push(
