@@ -8,9 +8,12 @@ class CodePin extends Component {
   constructor(props) {
     super(props);
 
+    const codeLength = props.number || props.code.length;
+
     this.state = {
       error: '',
-      code: new Array(props.number).fill(''),
+      number: codeLength,
+      code: new Array(codeLength).fill(''),
       edit: 0
     };
 
@@ -22,10 +25,21 @@ class CodePin extends Component {
     this.handleEdit = this.handleEdit.bind(this);
   }
 
-  clean() {
+  componentWillReceiveProps(newProps) {
+    const codeLength = newProps.number || newProps.code.length;
+
     this.setState({
-      code: new Array(this.props.number).fill(''),
+      number: new Array(codeLength).fill(''),
       edit: 0
+    });
+  }
+
+  clean() {
+    this.setState(prevState => {
+      return {
+        code: new Array(prevState.number).fill(''),
+        edit: 0
+      };
     });
     this.focus(0);
   }
@@ -50,14 +64,14 @@ class CodePin extends Component {
     newCode[id] = number;
 
     // User filling the last pin ?
-    if (id === this.props.number - 1) {
+    if (id === this.state.number - 1) {
       this.focus(0);
 
       // But it's different than code
       if (this.props.code !== newCode.join('')) {
         this.setState({
           error: this.props.error,
-          code: new Array(this.props.number).fill(''),
+          code: new Array(this.state.number).fill(''),
           edit: 0
         });
 
@@ -83,7 +97,6 @@ class CodePin extends Component {
   render() {
     const {
       text,
-      number,
       success,
       pinStyle,
       textStyle,
@@ -94,7 +107,7 @@ class CodePin extends Component {
     } = this.props;
 
     pins = [];
-    for (let index = 0; index < number; index++) {
+    for (let index = 0; index < this.state.number; index++) {
       const id = index;
       pins.push(
         <TextInput
