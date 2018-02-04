@@ -121,6 +121,7 @@ class CodePin extends Component {
       pinStyle,
       textStyle,
       errorStyle,
+      obfuscation,
       containerStyle,
       containerPinStyle,
       ...props
@@ -129,13 +130,16 @@ class CodePin extends Component {
     pins = [];
     for (let index = 0; index < this.state.number; index++) {
       const id = index;
+      const value = this.state.code[id]
+        ? obfuscation ? '*' : this.state.code[id].toString()
+        : '';
       pins.push(
         <TextInput
           key={id}
           ref={ref => (this.textInputsRefs[id] = ref)}
           onChangeText={text => this.handleEdit(text, id)}
           onFocus={() => this.isFocus(id)}
-          value={this.state.code[id] ? this.state.code[id].toString() : ''}
+          value={value}
           style={[codePinStyles.pin, pinStyle]}
           returnKeyType={'done'}
           autoCapitalize={'sentences'}
@@ -170,6 +174,7 @@ CodePin.propTypes = {
   number: PropTypes.number,
   checkPinCode: PropTypes.func,
   autoFocusFirst: PropTypes.bool,
+  obfuscation: PropTypes.bool,
   pinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerPinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
@@ -181,6 +186,7 @@ CodePin.defaultProps = {
   number: 4,
   checkPinCode: null,
   autoFocusFirst: true,
+  obfuscation: false,
   text: 'Pin code',
   error: 'Bad pin code.',
   pinStyle: {},
