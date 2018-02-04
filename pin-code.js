@@ -53,6 +53,26 @@ class CodePin extends Component {
     if (id === this.props.number - 1) {
       this.focus(0);
 
+      // App pass a checkPinCode function
+      if (this.props.checkPinCode) {
+        this.props.checkPinCode(newCode.join(''), success => {
+          // App say it's different than code
+          if (!success) {
+            this.setState({
+              error: this.props.error,
+              code: new Array(this.props.number).fill(''),
+              edit: 0
+            });
+          } else {
+            // Is Okey !!!
+            this.props.success();
+          }
+        });
+
+        return;
+      }
+
+      // no checkPinCode function
       // But it's different than code
       if (this.props.code !== newCode.join('')) {
         this.setState({
@@ -135,6 +155,7 @@ CodePin.propTypes = {
   code: PropTypes.string.isRequired,
   success: PropTypes.func.isRequired,
   number: PropTypes.number,
+  checkPinCode: PropTypes.func,
   autoFocusFirst: PropTypes.bool,
   pinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerPinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
@@ -145,6 +166,7 @@ CodePin.propTypes = {
 
 CodePin.defaultProps = {
   number: 4,
+  checkPinCode: null,
   autoFocusFirst: true,
   text: 'Pin code',
   error: 'Bad pin code.',
