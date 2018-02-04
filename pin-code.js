@@ -8,9 +8,12 @@ class CodePin extends Component {
   constructor(props) {
     super(props);
 
+    const codeLength = props.number || props.code.length;
+
     this.state = {
       error: '',
-      code: new Array(props.number).fill(''),
+      number: codeLength,
+      code: new Array(codeLength).fill(''),
       edit: 0
     };
 
@@ -22,10 +25,21 @@ class CodePin extends Component {
     this.handleEdit = this.handleEdit.bind(this);
   }
 
-  clean() {
+  componentWillReceiveProps(newProps) {
+    const codeLength = newProps.number || newProps.code.length;
+
     this.setState({
-      code: new Array(this.props.number).fill(''),
+      number: codeLength,
       edit: 0
+    });
+  }
+
+  clean() {
+    this.setState(prevState => {
+      return {
+        code: new Array(prevState.number).fill(''),
+        edit: 0
+      };
     });
     this.focus(0);
   }
@@ -50,14 +64,34 @@ class CodePin extends Component {
     newCode[id] = number;
 
     // User filling the last pin ?
-    if (id === this.props.number - 1) {
+    if (id === this.state.number - 1) {
       this.focus(0);
 
+      // App pass a checkPinCode function
+      if (this.props.checkPinCode) {
+        this.props.checkPinCode(newCode.join(''), success => {
+          // App say it's different than code
+          if (!success) {
+            this.setState({
+              error: this.props.error,
+              code: new Array(this.state.number).fill(''),
+              edit: 0
+            });
+          } else {
+            // Is Okey !!!
+            this.props.success();
+          }
+        });
+
+        return;
+      }
+
+      // no checkPinCode function
       // But it's different than code
       if (this.props.code !== newCode.join('')) {
         this.setState({
           error: this.props.error,
-          code: new Array(this.props.number).fill(''),
+          code: new Array(this.state.number).fill(''),
           edit: 0
         });
 
@@ -83,26 +117,29 @@ class CodePin extends Component {
   render() {
     const {
       text,
-      number,
       success,
       pinStyle,
       textStyle,
       errorStyle,
+      obfuscation,
       containerStyle,
       containerPinStyle,
       ...props
     } = this.props;
 
     pins = [];
-    for (let index = 0; index < number; index++) {
+    for (let index = 0; index < this.state.number; index++) {
       const id = index;
+      const value = this.state.code[id]
+        ? obfuscation ? '*' : this.state.code[id].toString()
+        : '';
       pins.push(
         <TextInput
           key={id}
           ref={ref => (this.textInputsRefs[id] = ref)}
           onChangeText={text => this.handleEdit(text, id)}
           onFocus={() => this.isFocus(id)}
-          value={this.state.code[id] ? this.state.code[id].toString() : ''}
+          value={value}
           style={[codePinStyles.pin, pinStyle]}
           returnKeyType={'done'}
           autoCapitalize={'sentences'}
@@ -135,7 +172,9 @@ CodePin.propTypes = {
   code: PropTypes.string.isRequired,
   success: PropTypes.func.isRequired,
   number: PropTypes.number,
+  checkPinCode: PropTypes.func,
   autoFocusFirst: PropTypes.bool,
+  obfuscation: PropTypes.bool,
   pinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerPinStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
@@ -145,7 +184,9 @@ CodePin.propTypes = {
 
 CodePin.defaultProps = {
   number: 4,
+  checkPinCode: null,
   autoFocusFirst: true,
+  obfuscation: false,
   text: 'Pin code',
   error: 'Bad pin code.',
   pinStyle: {},
