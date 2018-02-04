@@ -29,7 +29,7 @@ class CodePin extends Component {
     const codeLength = newProps.number || newProps.code.length;
 
     this.setState({
-      number: new Array(codeLength).fill(''),
+      number: codeLength,
       edit: 0
     });
   }
