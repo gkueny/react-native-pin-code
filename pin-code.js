@@ -74,7 +74,7 @@ class CodePin extends Component {
           if (!success) {
             this.setState({
               error: this.props.error,
-              code: new Array(this.props.number).fill(''),
+              code: new Array(this.state.number).fill(''),
               edit: 0
             });
           } else {
