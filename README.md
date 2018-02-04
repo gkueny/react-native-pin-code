@@ -13,8 +13,7 @@ npm install react-native-pin-code --save
 
 ```js
 <CodePin
-  code="2018"
-  number={4}
+  code="2018" // code.length is used if you not pass number prop
   success={() => console.log('hurray!')} // If user fill '2018', success is called
   text="A simple Pin code component" // My title
   error="You fail" // If user fail (fill '2017' for instance)
@@ -27,7 +26,7 @@ or
 ```js
 <CodePin
   code="fakecode" // code prop is not used if checkPinCode is present
-  number={4}
+  number={4} // You must pass number prop, it will be used to display 4 (here) inputs
   checkPinCode={(code, callback) => callback(code === '1234')}
   // Check manually code (ask server for instance)
   // and call callback function with
