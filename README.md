@@ -26,7 +26,7 @@ or
 
 ```js
 <CodePin
-  code="fakecode"
+  code="fakecode" // code prop is not used if checkPinCode is present
   number={4}
   checkPinCode={(code, callback) => callback(code === '1234')}
   // Check manually code (ask server for instance)
