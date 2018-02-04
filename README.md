@@ -9,6 +9,19 @@ A simple pin code component
 
 npm install react-native-pin-code --save
 
+## Example
+
+```js
+<CodePin
+  code="2018"
+  number={4}
+  success={() => console.log('hurray!')} // If user fill '2018', success is called
+  text="A simple Pin code component" // My title
+  error="You fail" // If user fail (fill '2017' for instance)
+  autoFocusFirst={false} // disabling auto-focus
+/>
+```
+
 ## props
 
 | prop              | type                      | description                | isRequired | default value                                                                                                                                                                                                      |
