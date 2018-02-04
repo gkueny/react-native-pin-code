@@ -65,6 +65,8 @@ this.ref.focus(1);
 
 ## Examples
 
+> [react-native-pin-code-examples](https://github.com/gkueny/react-native-pin-code-examples)
+
 To test examples :
 
 ```
