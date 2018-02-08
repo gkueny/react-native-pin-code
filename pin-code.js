@@ -169,7 +169,7 @@ class CodePin extends Component {
 }
 
 CodePin.propTypes = {
-  code: PropTypes.string.isRequired,
+  code: PropTypes.string,
   success: PropTypes.func.isRequired,
   number: PropTypes.number,
   checkPinCode: PropTypes.func,
@@ -183,6 +183,7 @@ CodePin.propTypes = {
 };
 
 CodePin.defaultProps = {
+  code: '',
   number: 4,
   checkPinCode: null,
   autoFocusFirst: true,
