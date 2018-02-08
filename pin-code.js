@@ -23,6 +23,7 @@ class CodePin extends Component {
     this.focus = this.focus.bind(this);
     this.isFocus = this.isFocus.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -114,6 +115,14 @@ class CodePin extends Component {
     });
   }
 
+  onKeyPress(e) {
+    if (e.nativeEvent.key === 'Backspace') {
+      const edit = this.state.edit;
+      const toFocus = edit > 0 ? edit - 1 : 0;
+      this.focus(toFocus);
+    }
+  }
+
   render() {
     const {
       text,
@@ -145,6 +154,7 @@ class CodePin extends Component {
           autoCapitalize={'sentences'}
           autoCorrect={false}
           autoFocus={id === 0 && this.props.autoFocusFirst}
+          onKeyPress={this.onKeyPress}
           {...props}
         />
       );
