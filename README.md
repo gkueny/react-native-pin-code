@@ -25,7 +25,6 @@ or
 
 ```js
 <CodePin
-  code="fakecode" // code prop is not used if checkPinCode is present
   number={4} // You must pass number prop, it will be used to display 4 (here) inputs
   checkPinCode={(code, callback) => callback(code === '1234')}
   // Check manually code (ask server for instance)
@@ -39,11 +38,13 @@ or
 />
 ```
 
+> Code prop is not needed if checkPinCode is used
+
 ## props
 
 | prop              | type                      | description                                                                                                                                                                                                      | isRequired   | default value                                                                                                                                                                                                      |
 | ----------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| code              | number                    | pin code                                                                                                                                                                                                         | required     |                                                                                                                                                                                                                    |
+| code              | number                    | pin code                                                                                                                                                                                                         | not required | ''                                                                                                                                                                                                                 |
 | success           | function                  | call on success                                                                                                                                                                                                  | required     |                                                                                                                                                                                                                    |
 | checkPinCode      | function                  | this function is called to check pin code. The parameters are : `code` (the code filled by user) and a `callback` function. callback must be called with true (code pin is correct) or false (code pin is wrong) | not required | null                                                                                                                                                                                                               |
 | obfuscation       | boolean                   | If true, obfuscate code with '\*'                                                                                                                                                                                |              | false                                                                                                                                                                                                              |
