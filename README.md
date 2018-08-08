@@ -1,6 +1,6 @@
 # react-native-pin-code
 
-![last release](https://badgen.net/github/release/gkueny/react-native-pin-code)
+![last release](https://badgen.net/github/release/gkueny/react-native-pin-code) ![licence](https://badgen.net/github/license/gkueny/react-native-pin-code)
 
 A simple pin code component
 
