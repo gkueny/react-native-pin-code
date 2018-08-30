@@ -155,6 +155,7 @@ class CodePin extends Component {
           autoCorrect={false}
           autoFocus={id === 0 && this.props.autoFocusFirst}
           onKeyPress={this.onKeyPress}
+          underlineColorAndroid={'transparent'}
           {...props}
         />
       );
