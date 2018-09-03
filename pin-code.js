@@ -46,7 +46,8 @@ class CodePin extends Component {
   }
 
   focus(id) {
-    this.textInputsRefs[id].focus();
+    // Check to ensure that input exists. This is important in the case of autofill.
+    if(this.textInputsRefs[id]) this.textInputsRefs[id].focus();
   }
 
   isFocus(id) {
@@ -62,10 +63,27 @@ class CodePin extends Component {
 
   handleEdit(number, id) {
     let newCode = this.state.code.slice();
-    newCode[id] = number;
+
+    // Detecting if the entire code has been pasted or autofilled into
+    // the first field.
+    const hasAutofilled = number.length > 1 &&
+                          number.length === this.props.number &&
+                          id === 0;
+
+    if(hasAutofilled){
+      newCode = number.split('');
+
+      // Need to update state so UI updates.
+      this.setState({
+        code: newCode,
+        edit: this.props.number - 1
+      });
+    } else {
+      newCode[id] = number[0];
+    }
 
     // User filling the last pin ?
-    if (id === this.state.number - 1) {
+    if (id === this.state.number - 1 || hasAutofilled) {
       this.focus(0);
 
       // App pass a checkPinCode function
@@ -149,6 +167,7 @@ class CodePin extends Component {
           onChangeText={text => this.handleEdit(text, id)}
           onFocus={() => this.isFocus(id)}
           value={value}
+          maxLength={id === 0 ? this.props.number : 1}
           style={[codePinStyles.pin, pinStyle]}
           returnKeyType={'done'}
           autoCapitalize={'sentences'}

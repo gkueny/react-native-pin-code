@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Added
+
+* Supports auto-fill and past of codes.
+
+### Fixed
+
+* Fixed crash which occurs when using iOS 12's security code auto-fill feature.
+* Corrected Typos in Readme/Changelog
+
 ## [v0.4.1] - 2018-02-09
 
 ### Fixed
@@ -21,8 +32,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-* New prop `checkPinCode`(optionnal). Called to check pin code (`code` prop is not used if `checkPinCode` prop is present)
-* New prop `obfuscation` (optionnal). Obfuscate code if set to true
+* New prop `checkPinCode`(optional). Called to check pin code (`code` prop is not used if `checkPinCode` prop is present)
+* New prop `obfuscation` (optional). Obfuscate code if set to true
 
 ### Changed
 
