@@ -14,7 +14,8 @@ class CodePin extends Component {
       error: '',
       number: codeLength,
       code: new Array(codeLength).fill(''),
-      edit: 0
+      edit: 0,
+      reset: false
     };
 
     this.textInputsRefs = [];
@@ -39,7 +40,8 @@ class CodePin extends Component {
     this.setState(prevState => {
       return {
         code: new Array(prevState.number).fill(''),
-        edit: 0
+        edit: 0,
+        reset: true
       };
     });
     this.focus(0);
@@ -47,7 +49,7 @@ class CodePin extends Component {
 
   focus(id) {
     // Check to ensure that input exists. This is important in the case of autofill.
-    if(this.textInputsRefs[id]) this.textInputsRefs[id].focus();
+    if (this.textInputsRefs[id]) this.textInputsRefs[id].focus();
   }
 
   isFocus(id) {
@@ -66,17 +68,17 @@ class CodePin extends Component {
 
     // Detecting if the entire code has been pasted or autofilled into
     // the first field.
-    const hasAutofilled = number.length > 1 &&
-                          number.length === this.props.number &&
-                          id === 0;
+    const hasAutofilled =
+      number.length > 1 && number.length === this.props.number && id === 0;
 
-    if(hasAutofilled){
+    if (hasAutofilled) {
       newCode = number.split('');
 
       // Need to update state so UI updates.
       this.setState({
         code: newCode,
-        edit: this.props.number - 1
+        edit: this.props.number - 1,
+        reset: false
       });
     } else {
       newCode[id] = number[0];
@@ -94,11 +96,16 @@ class CodePin extends Component {
             this.setState({
               error: this.props.error,
               code: new Array(this.state.number).fill(''),
-              edit: 0
+              edit: 0,
+              reset: true
             });
           } else {
             // Is Okey !!!
             this.props.success();
+            this.setState({
+              code: newCode,
+              reset: true
+            });
           }
         });
 
@@ -111,13 +118,18 @@ class CodePin extends Component {
         this.setState({
           error: this.props.error,
           code: new Array(this.state.number).fill(''),
-          edit: 0
+          edit: 0,
+          reset: true
         });
 
         return;
       }
 
       this.props.success();
+      this.setState({
+        code: newCode,
+        reset: true
+      });
 
       return;
     }
@@ -128,7 +140,8 @@ class CodePin extends Component {
       return {
         error: '',
         code: newCode,
-        edit: prevState.edit + 1
+        edit: prevState.edit + 1,
+        reset: false
       };
     });
   }
@@ -158,11 +171,13 @@ class CodePin extends Component {
     for (let index = 0; index < this.state.number; index++) {
       const id = index;
       const value = this.state.code[id]
-        ? obfuscation ? '*' : this.state.code[id].toString()
+        ? obfuscation
+          ? '*'
+          : this.state.code[id].toString()
         : '';
       pins.push(
         <TextInput
-          key={id}
+          key={id + value + this.state.reset} // force to re-render on update
           ref={ref => (this.textInputsRefs[id] = ref)}
           onChangeText={text => this.handleEdit(text, id)}
           onFocus={() => this.isFocus(id)}
