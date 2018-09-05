@@ -14,7 +14,7 @@ class CodePin extends Component {
       error: '',
       number: codeLength,
       code: new Array(codeLength).fill(''),
-      edit: 0,
+      edit: null,
       reset: false
     };
 
@@ -32,7 +32,7 @@ class CodePin extends Component {
 
     this.setState({
       number: codeLength,
-      edit: 0
+      edit: null
     });
   }
 
@@ -40,7 +40,7 @@ class CodePin extends Component {
     this.setState(prevState => {
       return {
         code: new Array(prevState.number).fill(''),
-        edit: 0,
+        edit: null,
         reset: true
       };
     });
@@ -187,7 +187,12 @@ class CodePin extends Component {
           returnKeyType={'done'}
           autoCapitalize={'sentences'}
           autoCorrect={false}
-          autoFocus={id === 0 && this.props.autoFocusFirst}
+          autoFocus={
+            (id === 0 &&
+              this.state.edit === null &&
+              this.props.autoFocusFirst) ||
+            id === this.state.edit
+          }
           onKeyPress={this.onKeyPress}
           {...props}
         />
