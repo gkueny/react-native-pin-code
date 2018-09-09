@@ -102,13 +102,13 @@ this.ref.focus(1);
 
 > [react-native-pin-code-examples](https://github.com/gkueny/react-native-pin-code-examples)
 
-To test examples :
+To test examples (use [expo](https://expo.io)) :
 
 ```
   git clone https://github.com/gkueny/react-native-pin-code-examples
   cd blurExample
   npm install
-  react-native run-ios
+  npm run ios
 ```
 
 or
@@ -117,5 +117,5 @@ or
   git clone https://github.com/gkueny/react-native-pin-code-examples
   cd simpleExample
   npm install
-  react-native run-ios
+  npm run ios
 ```
