@@ -30,10 +30,12 @@ class CodePin extends Component {
   componentWillReceiveProps(newProps) {
     const codeLength = newProps.number || newProps.code.length;
 
-    this.setState({
-      number: codeLength,
-      edit: null
-    });
+    if (newProps.number !== this.props.number) {
+      this.setState({
+        number: codeLength,
+        edit: null
+      });
+    }
   }
 
   clean() {
@@ -102,11 +104,11 @@ class CodePin extends Component {
           } else {
             // Is Okey !!!
             this.props.success();
-            this.setState({
+            this.setState(prevState => ({
               code: newCode,
-              edit: null,
+              edit: prevState.edit + 1,
               reset: true
-            });
+            }));
           }
         });
 
@@ -127,11 +129,11 @@ class CodePin extends Component {
       }
 
       this.props.success();
-      this.setState({
+      this.setState(prevState => ({
         code: newCode,
-        edit: null,
+        edit: prevState.edit + 1,
         reset: true
-      });
+      }));
 
       return;
     }
