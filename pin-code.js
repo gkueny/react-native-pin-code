@@ -104,6 +104,7 @@ class CodePin extends Component {
             this.props.success();
             this.setState({
               code: newCode,
+              edit: null,
               reset: true
             });
           }
@@ -128,6 +129,7 @@ class CodePin extends Component {
       this.props.success();
       this.setState({
         code: newCode,
+        edit: null,
         reset: true
       });
 
