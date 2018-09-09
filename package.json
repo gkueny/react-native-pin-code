@@ -1,6 +1,6 @@
 {
   "name": "react-native-pin-code",
-  "version": "0.5.1-beta3",
+  "version": "0.5.1",
   "description": "A simple pin code component for react-native",
   "main": "pin-code.js",
   "scripts": {
