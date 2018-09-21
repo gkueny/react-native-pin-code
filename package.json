@@ -4,7 +4,7 @@
   "description": "A simple pin code component for react-native",
   "main": "pin-code.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "CI=true jest"
   },
   "repository": {
     "type": "git",
@@ -22,11 +22,23 @@
     "url": "https://github.com/gkueny/react-native-pin-code/issues"
   },
   "peerDependencies": {
-    "react": ">=15.4.0",
-    "react-native": ">=0.40"
+    "react": "*",
+    "react-native": "*"
   },
   "homepage": "https://github.com/gkueny/react-native-pin-code#readme",
   "dependencies": {
     "prop-types": "^15.5.10"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-native": "^0.57.0",
+    "react-test-renderer": "^16.5.2"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }
