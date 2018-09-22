@@ -24,6 +24,18 @@ jest.mock('TextInput', () => {
 
 describe('CodePin', () => {
   it('renders correctly', () => {
-    TestRenderer.create(<CodePin success={() => {}} />);
+    TestRenderer.create(<CodePin />);
+  });
+});
+
+describe('initialization', () => {
+  it('With no props', () => {
+    const instance = TestRenderer.create(<CodePin />).root.instance;
+
+    const state = instance.state;
+
+    expect(state.currentCode).toBe('');
+    expect(state.currentIdEdit).toBe(0);
+    expect(state.codeLength).toBe(0);
   });
 });
