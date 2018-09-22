@@ -5,6 +5,18 @@ import {TextInput, View, Text} from 'react-native';
 class CodePin extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      currentCode: '',
+      currentIdEdit: 0,
+      codeLength: null
+    };
+  }
+
+  static getDerivedStateFromProps(props) {
+    return {
+      codeLength: props.code ? props.code.length : props.codeLength
+    };
   }
 
   render() {
