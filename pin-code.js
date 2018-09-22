@@ -10,7 +10,14 @@ class CodePin extends Component {
   render() {}
 }
 
-CodePin.propTypes = {};
+CodePin.propTypes = {
+  code: PropTypes.string, // directly specify code
+  codeLength: PropTypes.number, // specify code length if checkPinCode is used
+  checkPinCode: PropTypes.func, // check manually code
+  onSuccess: PropTypes.func, // call on success
+  onError: PropTypes.func, // call on error
+  pinStyle: PropTypes.object
+};
 
 CodePin.defaultProps = {};
 
