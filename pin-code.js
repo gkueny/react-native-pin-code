@@ -182,6 +182,7 @@ class CodePin extends Component {
       pins.push(
         <TextInput
           key={id + value + this.state.reset} // force to re-render on update
+          id={id}
           ref={ref => (this.textInputsRefs[id] = ref)}
           onChangeText={text => this.handleEdit(text, id)}
           onFocus={() => this.isFocus(id)}
