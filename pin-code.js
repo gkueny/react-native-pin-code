@@ -7,7 +7,9 @@ class CodePin extends Component {
     super(props);
   }
 
-  render() {}
+  render() {
+    return null;
+  }
 }
 
 CodePin.propTypes = {
