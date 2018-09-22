@@ -27,23 +27,3 @@ describe('CodePin', () => {
     TestRenderer.create(<CodePin success={() => {}} />);
   });
 });
-
-describe('CodePin: clean function', () => {
-  it('clean code', () => {
-    const instance = TestRenderer.create(<CodePin success={() => {}} />).root
-      .instance;
-
-    instance.setState({
-      code: ['1', '2', '3', '4']
-    });
-
-    instance.clean();
-
-    const {code} = instance.state;
-
-    expect(code[0]).toBe('');
-    expect(code[1]).toBe('');
-    expect(code[2]).toBe('');
-    expect(code[3]).toBe('');
-  });
-});
