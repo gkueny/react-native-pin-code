@@ -19,6 +19,13 @@ CodePin.propTypes = {
   pinStyle: PropTypes.object
 };
 
-CodePin.defaultProps = {};
+CodePin.defaultProps = {
+  code: null,
+  codeLength: 0,
+  checkPinCode: null,
+  onSuccess: null,
+  onError: null,
+  pinStyle: null
+};
 
 export default CodePin;
