@@ -5,14 +5,14 @@ import CodePin from '../pin-code';
 
 import TestRenderer from 'react-test-renderer';
 
-let focused = [false, false, false, false, false];
+let mock_focused = [false, false, false, false, false];
 
 jest.mock('TextInput', () => {
   const RealComponent = require.requireActual('TextInput');
   const React = require('React');
   class TextInput extends React.Component {
     focus() {
-      focused[this.props.id] = true;
+      mock_focused[this.props.id] = true;
     }
     render() {
       return React.createElement('TextInput', this.props, this.props.children);
@@ -21,10 +21,6 @@ jest.mock('TextInput', () => {
   TextInput.propTypes = RealComponent.propTypes;
   return TextInput;
 });
-
-const tree = TestRenderer.create(
-  <CodePin ref={refComponent => (ref = refComponent)} success={() => {}} />
-);
 
 describe('CodePin', () => {
   it('renders correctly', () => {
