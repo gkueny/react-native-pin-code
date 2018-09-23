@@ -2,7 +2,7 @@
   "name": "react-native-pin-code",
   "version": "0.5.1",
   "description": "A simple pin code component for react-native",
-  "main": "src/pin-code.js",
+  "main": "lib/pin-code.js",
   "scripts": {
     "test": "CI=true jest",
     "lint": "eslint .",
