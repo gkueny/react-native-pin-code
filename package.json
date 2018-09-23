@@ -5,7 +5,7 @@
   "main": "lib/pin-code.js",
   "scripts": {
     "test": "CI=true jest",
-    "lint": "eslint .",
+    "lint": "eslint src __tests__",
     "build": "rollup --config",
     "build:exemple": "rollup --config exemple-rollup.config.js"
   },
