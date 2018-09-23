@@ -3,6 +3,7 @@ import 'react-native';
 import TestRenderer from 'react-test-renderer';
 
 import CodePin from '../src/pin-code';
+import Pin from '../src/pin';
 
 const mockFocused = [false, false, false, false, false];
 
@@ -31,7 +32,7 @@ describe('CodePin', () => {
   });
 });
 
-describe('state initialization', () => {
+describe('State initialization', () => {
   it('With no props', () => {
     const { state } = TestRenderer.create(<CodePin />).root.instance;
 
@@ -60,5 +61,31 @@ describe('state initialization', () => {
     ).root.instance;
 
     expect(state.codeLength).toBe(3);
+  });
+});
+
+describe('Render pin', () => {
+  it('Render 4 Pin with code length at 4', () => {
+    const { root } = TestRenderer.create(<CodePin code="2567" />);
+
+    expect(root.findAllByType(Pin).length).toBe(4);
+  });
+
+  it('Render 7 Pin with code length at 7', () => {
+    const { root } = TestRenderer.create(<CodePin code="45620HK" />);
+
+    expect(root.findAllByType(Pin).length).toBe(7);
+  });
+
+  it('Render 2 Pin with code length at 2', () => {
+    const { root } = TestRenderer.create(<CodePin codeLength={2} />);
+
+    expect(root.findAllByType(Pin).length).toBe(2);
+  });
+
+  it('Render 2 Pin with code length at 3', () => {
+    const { root } = TestRenderer.create(<CodePin codeLength={3} />);
+
+    expect(root.findAllByType(Pin).length).toBe(3);
   });
 });
