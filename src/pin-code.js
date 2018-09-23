@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View, TextInput } from 'react-native';
 import { PropTypes } from 'prop-types';
 
 import Pin from './pin';
@@ -43,7 +44,12 @@ class CodePin extends Component {
 
     const pins = CodePin.getPinList(codeLength, currentCode);
 
-    return pins;
+    return (
+      <View>
+        <TextInput value={currentCode} />
+        {pins}
+      </View>
+    );
   }
 }
 
