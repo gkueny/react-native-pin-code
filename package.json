@@ -6,7 +6,8 @@
   "scripts": {
     "test": "CI=true jest",
     "lint": "eslint .",
-    "build:exemple": "rollup --config"
+    "build": "rollup --config",
+    "build:exemple": "rollup --config exemple-rollup.config.js"
   },
   "repository": {
     "type": "git",
