@@ -14,9 +14,9 @@ class CodePin extends Component {
     };
   }
 
-  static getDerivedStateFromProps(props) {
+  static getDerivedStateFromProps({ code, codeLength }) {
     return {
-      codeLength: props.code ? props.code.length : props.codeLength,
+      codeLength: code ? code.length : codeLength,
     };
   }
 
