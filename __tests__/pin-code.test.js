@@ -2,12 +2,14 @@ import React from 'react';
 import 'react-native';
 import TestRenderer from 'react-test-renderer';
 
-import CodePin from '../pin-code';
+import CodePin from '../src/pin-code';
 
 const mockFocused = [false, false, false, false, false];
 
 jest.mock('TextInput', () => {
   const RealComponent = require.requireActual('TextInput');
+
+  const React = require('react'); //eslint-disable-line
   class TextInput extends React.Component {
     focus() {
       const { id } = this.props;
