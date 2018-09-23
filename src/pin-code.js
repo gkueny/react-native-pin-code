@@ -1,5 +1,7 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+
+import Pin from './pin';
 
 class CodePin extends Component {
   constructor(props) {
@@ -18,8 +20,30 @@ class CodePin extends Component {
     };
   }
 
+  /**
+   * Return all Pins
+   * @param {number} codeLength
+   * @param {string} currentCode
+   *
+   * @returns {array} pins's list
+   */
+  static getPinList(codeLength, currentCode) {
+    const pins = [];
+
+    for (let i = 0; i < codeLength; i += 1) {
+      const value = currentCode.length >= i ? currentCode[i] : '';
+      pins.push(<Pin key={i + value} value={value} />);
+    }
+
+    return pins;
+  }
+
   render() {
-    return null;
+    const { codeLength, currentCode } = this.state;
+
+    const pins = CodePin.getPinList(codeLength, currentCode);
+
+    return pins;
   }
 }
 
