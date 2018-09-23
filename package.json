@@ -4,7 +4,7 @@
   "description": "A simple pin code component for react-native",
   "main": "lib/pin-code.js",
   "scripts": {
-    "test": "CI=true jest",
+    "test": "CI=true jest __tests__",
     "lint": "eslint src __tests__",
     "build": "rollup --config",
     "build:exemple": "rollup --config exemple-rollup.config.js"
@@ -30,11 +30,11 @@
   },
   "homepage": "https://github.com/gkueny/react-native-pin-code#readme",
   "dependencies": {
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@babel/plugin-external-helpers": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
