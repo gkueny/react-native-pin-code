@@ -88,4 +88,12 @@ describe('Render pin', () => {
 
     expect(root.findAllByType(Pin).length).toBe(3);
   });
+
+  describe('Render input', () => {
+    it('Render one Input', () => {
+      const { root } = TestRenderer.create(<CodePin />);
+
+      expect(root.findAllByType('TextInput').length).toBe(1);
+    });
+  });
 });
