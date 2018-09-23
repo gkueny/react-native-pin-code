@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import {PropTypes} from 'prop-types';
-import {TextInput, View, Text} from 'react-native';
+import { Component } from 'react';
+import { PropTypes } from 'prop-types';
 
 class CodePin extends Component {
   constructor(props) {
@@ -9,13 +8,13 @@ class CodePin extends Component {
     this.state = {
       currentCode: '',
       currentIdEdit: 0,
-      codeLength: null
+      codeLength: null,
     };
   }
 
   static getDerivedStateFromProps(props) {
     return {
-      codeLength: props.code ? props.code.length : props.codeLength
+      codeLength: props.code ? props.code.length : props.codeLength,
     };
   }
 
@@ -30,7 +29,7 @@ CodePin.propTypes = {
   checkPinCode: PropTypes.func, // check manually code
   onSuccess: PropTypes.func, // call on success
   onError: PropTypes.func, // call on error
-  pinStyle: PropTypes.object
+  pinStyle: PropTypes.object,
 };
 
 CodePin.defaultProps = {
@@ -39,7 +38,7 @@ CodePin.defaultProps = {
   checkPinCode: null,
   onSuccess: null,
   onError: null,
-  pinStyle: null
+  pinStyle: null,
 };
 
 export default CodePin;
