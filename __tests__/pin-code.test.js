@@ -28,7 +28,7 @@ describe('CodePin', () => {
   });
 });
 
-describe('initialization', () => {
+describe('state initialization', () => {
   it('With no props', () => {
     const instance = TestRenderer.create(<CodePin />).root.instance;
 
@@ -37,5 +37,31 @@ describe('initialization', () => {
     expect(state.currentCode).toBe('');
     expect(state.currentIdEdit).toBe(0);
     expect(state.codeLength).toBe(0);
+  });
+
+  it('With code prop', () => {
+    const instance = TestRenderer.create(<CodePin code="256" />).root.instance;
+
+    const state = instance.state;
+
+    expect(state.codeLength).toBe(3);
+  });
+
+  it('With codeLength prop', () => {
+    const instance = TestRenderer.create(<CodePin codeLength={5} />).root
+      .instance;
+
+    const state = instance.state;
+
+    expect(state.codeLength).toBe(5);
+  });
+
+  it('With code && codeLength prop, use code prop', () => {
+    const instance = TestRenderer.create(<CodePin code="256" codeLength={5} />)
+      .root.instance;
+
+    const state = instance.state;
+
+    expect(state.codeLength).toBe(3);
   });
 });
