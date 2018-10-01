@@ -103,12 +103,14 @@ class CodePin extends Component {
             });
           } else {
             // Is Okey !!!
-            this.props.success();
-            this.setState(prevState => ({
-              code: newCode,
-              edit: prevState.edit + 1,
-              reset: true
-            }));
+            this.setState(
+              prevState => ({
+                edit: prevState.edit + 1,
+                code: newCode,
+                reset: true
+              }),
+              this.props.success
+            );
           }
         });
 
@@ -128,12 +130,14 @@ class CodePin extends Component {
         return;
       }
 
-      this.props.success();
-      this.setState(prevState => ({
-        code: newCode,
-        edit: prevState.edit + 1,
-        reset: true
-      }));
+      this.setState(
+        prevState => ({
+          edit: prevState.edit + 1,
+          code: newCode,
+          reset: true
+        }),
+        this.props.success
+      );
 
       return;
     }
@@ -179,6 +183,7 @@ class CodePin extends Component {
           ? '*'
           : this.state.code[id].toString()
         : '';
+
       pins.push(
         <TextInput
           key={id + value + this.state.reset} // force to re-render on update
