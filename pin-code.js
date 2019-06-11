@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {PropTypes} from 'prop-types';
-import {TextInput, View, Text} from 'react-native';
+import React, { Component } from "react";
+import { PropTypes } from "prop-types";
+import { TextInput, View, Text } from "react-native";
 
-import {codePinStyles} from './pin-code-style';
+import { codePinStyles } from "./pin-code-style";
 
 class CodePin extends Component {
   constructor(props) {
@@ -11,9 +11,9 @@ class CodePin extends Component {
     const codeLength = props.number || props.code.length;
 
     this.state = {
-      error: '',
+      error: "",
       number: codeLength,
-      code: new Array(codeLength).fill(''),
+      code: new Array(codeLength).fill(""),
       edit: null,
       reset: false
     };
@@ -41,7 +41,7 @@ class CodePin extends Component {
   clean() {
     this.setState(prevState => {
       return {
-        code: new Array(prevState.number).fill(''),
+        code: new Array(prevState.number).fill(""),
         edit: null,
         reset: true
       };
@@ -57,7 +57,7 @@ class CodePin extends Component {
   isFocus(id) {
     let newCode = this.state.code.slice();
 
-    for (let i = 0; i < newCode.length; i++) if (i >= id) newCode[i] = '';
+    for (let i = 0; i < newCode.length; i++) if (i >= id) newCode[i] = "";
 
     this.setState({
       code: newCode,
@@ -70,34 +70,46 @@ class CodePin extends Component {
 
     // Detecting if the entire code has been pasted or autofilled into
     // the first field.
-    const hasAutofilled =
-      number.length > 1 && number.length === this.props.number && id === 0;
+    const hasAutofilled = number.length > 1 && id === 0;
 
     if (hasAutofilled) {
-      newCode = number.split('');
+      const autofillCode = number.split("");
 
       // Need to update state so UI updates.
-      this.setState({
-        code: newCode,
-        edit: this.props.number - 1,
-        reset: false
-      });
+      this.setState(
+        {
+          code: newCode.map((code, i) => {
+            return autofillCode[i] ? autofillCode[i] : code;
+          }),
+          edit:
+            autofillCode.length >= this.props.number
+              ? this.props.number - 1
+              : autofillCode.length,
+          reset: false
+        },
+        () => {
+          this.focus(this.state.edit);
+        }
+      );
     } else {
       newCode[id] = number[0];
     }
 
     // User filling the last pin ?
-    if (id === this.state.number - 1 || hasAutofilled) {
+    if (
+      id === this.state.number - 1 ||
+      (hasAutofilled && number.length === this.props.number)
+    ) {
       this.focus(0);
 
       // App pass a checkPinCode function
       if (this.props.checkPinCode) {
-        this.props.checkPinCode(newCode.join(''), success => {
+        this.props.checkPinCode(newCode.join(""), success => {
           // App say it's different than code
           if (!success) {
             this.setState({
               error: this.props.error,
-              code: new Array(this.state.number).fill(''),
+              code: new Array(this.state.number).fill(""),
               edit: 0,
               reset: true
             });
@@ -119,10 +131,10 @@ class CodePin extends Component {
 
       // no checkPinCode function
       // But it's different than code
-      if (this.props.code !== newCode.join('')) {
+      if (this.props.code !== newCode.join("")) {
         this.setState({
           error: this.props.error,
-          code: new Array(this.state.number).fill(''),
+          code: new Array(this.state.number).fill(""),
           edit: 0,
           reset: true
         });
@@ -142,20 +154,22 @@ class CodePin extends Component {
       return;
     }
 
-    this.focus(this.state.edit + 1);
+    if (!hasAutofilled) {
+      this.focus(this.state.edit + 1);
 
-    this.setState(prevState => {
-      return {
-        error: '',
-        code: newCode,
-        edit: prevState.edit + 1,
-        reset: false
-      };
-    });
+      this.setState(prevState => {
+        return {
+          error: "",
+          code: newCode,
+          edit: prevState.edit + 1,
+          reset: false
+        };
+      });
+    }
   }
 
   onKeyPress(e) {
-    if (e.nativeEvent.key === 'Backspace') {
+    if (e.nativeEvent.key === "Backspace") {
       const edit = this.state.edit;
       const toFocus = edit > 0 ? edit - 1 : 0;
       this.focus(toFocus);
@@ -180,9 +194,9 @@ class CodePin extends Component {
       const id = index;
       const value = this.state.code[id]
         ? obfuscation
-          ? '*'
+          ? "*"
           : this.state.code[id].toString()
-        : '';
+        : "";
 
       pins.push(
         <TextInput
@@ -193,8 +207,8 @@ class CodePin extends Component {
           value={value}
           maxLength={id === 0 ? this.props.number : 1}
           style={[codePinStyles.pin, pinStyle]}
-          returnKeyType={'done'}
-          autoCapitalize={'sentences'}
+          returnKeyType={"done"}
+          autoCapitalize={"sentences"}
           autoCorrect={false}
           autoFocus={
             (id === 0 &&
@@ -241,13 +255,13 @@ CodePin.propTypes = {
 };
 
 CodePin.defaultProps = {
-  code: '',
+  code: "",
   number: 4,
   checkPinCode: null,
   autoFocusFirst: true,
   obfuscation: false,
-  text: 'Pin code',
-  error: 'Bad pin code.',
+  text: "Pin code",
+  error: "Bad pin code.",
   pinStyle: {},
   containerPinStyle: {},
   containerStyle: {},
